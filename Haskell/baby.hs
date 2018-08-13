@@ -57,13 +57,46 @@ nEsimoElemento fullList@(x:xs) n
 
 -- flatten a nested list structure
 -- de acordo com o exercicio, teremos que definir um novo tipo para NestedLists, pois em Haskell listas sao homogeneas
-flatten :: [a] -> [a]
-flatten [] = []
-flatten [x] = x:[]
-flatten (x:xs) = x : flatten xs
-flatten ((x:xs):xss) = x : flatten xs : flatten xss
+-- flatten :: [a] -> [a]
+-- flatten [] = []
+-- flatten [x] = x:[]
+-- flatten (x:xs) = x : flatten xs
+-- flatten ((x:xs):xss) = x : flatten xs : flatten xss
 
--- Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements
--- they should be placed in separate sublists
-pack :: [a] -> [[a]]
+-- Eliminate consecutive duplicates of list elements
+compress :: (Eq a) => [a] -> [a]
+compress [] = []
+compress (x:xs)
+      | x `elem` xs = x : compress (removeReplicate xs x)
+      | otherwise = x : compress xs
+      where
+        removeReplicate [] _ = []
+        removeReplicate fullRest@(y:ys) p
+            | y /= p = y : removeReplicate ys p
+            | otherwise = removeReplicate ys p
+
+-- testando eliminacao de repetido
+testando :: (Eq a) => [a] -> a -> [a]
+testando [] _ = []
+testando fullRest@(y:ys) p
+      | y /= p = y : testando ys p
+      | otherwise = testando ys p
+
+-- Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements they should be placed in separate sublists.
+pack :: (Eq a) => [a] -> [[a]]
 pack [] = []
+pack (x:xs)
+      | x `elem` xs = (x : findAllAndPack xs x) : pack (removeReplicate xs x)
+      | otherwise = [[x]]
+      where
+        findAllAndPack [] _ = []
+        findAllAndPack fullRest@(y:ys) p
+            | y == p = y : findAllAndPack ys p
+            | otherwise = []
+        removeReplicate [] _ = []
+        removeReplicate fullRest@(y:ys) p
+            | y /= p = y : removeReplicate ys p
+            | otherwise = removeReplicate ys p
+
+
+-- fazer algoritmos de ordenacao
