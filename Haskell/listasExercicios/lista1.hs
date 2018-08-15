@@ -15,11 +15,11 @@ somaPares (x:xs)
     | (x `mod` 2) == 0 = x + somaPares xs
     | otherwise = somaPares xs
 
--- soma dos elementos nas posições pares da lista
+-- soma dos elementos nas posições pares da lista ( o primeiro elemento esta na posicao 1)
 somaPosicaoPar :: (Integral a, Eq a) => [a] -> a
 somaPosicaoPar [] = 0
-somaPosicaoPar [e] = e
-somaPosicaoPar (x:xs) = x + (somaPosicaoPar (tail xs))
+somaPosicaoPar [x] = 0
+somaPosicaoPar (x:y:xs) = y + (somaPosicaoPar xs)
 
 -- existe item na lista (True ou False)
 existe :: (Eq a) => [a] -> a -> Bool
@@ -94,7 +94,61 @@ shiftLeft :: [a] -> [a]
 shiftLeft [] = []
 shiftLeft (x:xs) = xs ++ x:[]
 
+-- shift left n vezes
+shiftLeftNVezes :: (Integral b) => [a] -> b -> [a]
+shiftLeftNVezes [] _ = []
+shiftLeftNVezes (x:xs) n
+    | n == 1 = xs ++ x:[]
+    | otherwise = shiftLeftNVezes (xs ++ x:[]) (n-1)
 
+-- remove item da lista (1 vez so)
+removeItemDaLista :: (Eq a) => [a] -> a -> [a]
+removeItemDaLista [] _ = []
+removeItemDaLista (x:xs) e
+    | x == e = xs
+    | otherwise = x : removeItemDaLista xs e
 
--- [1,2,3,4,5,5,666,7], 5, 99
--- [1,2,3,4,99,99,666,7]
+-- remove item da lista (todas as vezes)
+removeItemDaLista2 :: (Eq a) => [a] -> a -> [a]
+removeItemDaLista2 [] _ = []
+removeItemDaLista2 (x:xs) e
+    | x /= e = x : removeItemDaLista2 xs e
+    | otherwise = removeItemDaLista2 xs e
+
+-- remove item da lista (as primeiras n vezes)
+removeItemDaLista3 :: (Eq a, Integral b) => [a] -> a -> b -> [a]
+removeItemDaLista3 [] _ _ = []
+removeItemDaLista3 (x:xs) e n
+    | x == e && n == 1 = xs
+    | x == e && n > 1 = removeItemDaLista3 xs e (n-1)
+    | otherwise = x : removeItemDaLista3 xs e n
+    -- | x == e = (if n == 1 then xs else removeItemDaLista3 xs e (n-1))
+    -- | otherwise = x : removeItemDaLista3 xs e (n-1)
+
+-- remove item da lista (a ultima vez que ele aparece) **
+-- removeItemDaLista4 :: (Eq a) => [a] -> a -> [a]
+-- removeItemDaLista4 [] _ = []
+-- removeItemDaLista4 (x:xs) e
+--     | x == e = removeItemDaLista4 x:xs e
+
+-- troca velho por novo na lista (1 so vez)
+trocaVelhoPorNovo :: (Eq a) => [a] -> a -> a -> [a]
+trocaVelhoPorNovo [] _ _ = []
+trocaVelhoPorNovo (x:xs) v n
+    | x == v = n : xs
+    | otherwise = x : (trocaVelhoPorNovo xs v n)
+
+-- troca velho por novo na lista (todas vezes)
+trocaVelhoPorNovo2 :: (Eq a) => [a] -> a -> a -> [a]
+trocaVelhoPorNovo2 [] _ _ = []
+trocaVelhoPorNovo2 (x:xs) v n
+    | x == v = n : (trocaVelhoPorNovo2 xs v n)
+    | otherwise = x : (trocaVelhoPorNovo2 xs v n)
+
+-- troca velho por novo na lista n (as primeiras n vezes)
+trocaVelhoPorNovo3 :: (Eq a, Integral b) => [a] -> a -> a -> b -> [a]
+trocaVelhoPorNovo3 [] _ _ _ = []
+trocaVelhoPorNovo3 (x:xs) v n i
+    | x == v && i == 1 = n : xs
+    | x == v && i > 1 = n : (trocaVelhoPorNovo3 xs v n (i-1))
+    | otherwise = x : (trocaVelhoPorNovo3 xs v n i)
