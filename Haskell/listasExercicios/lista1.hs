@@ -79,13 +79,30 @@ geraAteN :: (Integral a) => a -> [a]
 geraAteN 1 = 1:[]
 geraAteN n = geraAteN (n-1) ++ n:[]
 
+-- retorna o ultimo elemento de uma lista
+ultimoElemento :: [a] -> a
+ultimoElemento [] = error "Nao ha elementos nesta lista"
+ultimoElemento [x] = x
+ultimoElemento (x:xs) = ultimoElemento xs
+
+-- retorna a lista sem o ultimo elemento
+semOUltimo :: [a] -> [a]
+semOUltimo [] = []
+semOUltimo [a] = []
+semOUltimo (x:xs) = x : (semOUltimo xs)
+
 -- shift right
 -- shiftr [1,2,3,4]
 --  ==> [4,1,2,3]
--- shiftRight :: [a] -> [a]
--- shiftRight [] = []
--- shiftRight [a] = [a]
--- shiftRight (x:xs) = x : shiftRight (tail xs)
+shiftRight :: [a] -> [a]
+shiftRight [] = []
+shiftRight xs = (ultimoElemento xs) : (semOUltimo xs)
+
+-- shift right n vezes
+shiftRightNVezes :: (Integral b) => [a] -> b -> [a]
+shiftRightNVezes xs n
+    | n == 1 = (ultimoElemento xs) : (semOUltimo xs)
+    | otherwise = shiftRightNVezes ((ultimoElemento xs) : (semOUltimo xs)) (n-1)
 
 -- shift left
 -- shiftr [1,2,3,4]
@@ -126,10 +143,9 @@ removeItemDaLista3 (x:xs) e n
     -- | otherwise = x : removeItemDaLista3 xs e (n-1)
 
 -- remove item da lista (a ultima vez que ele aparece) **
--- removeItemDaLista4 :: (Eq a) => [a] -> a -> [a]
--- removeItemDaLista4 [] _ = []
--- removeItemDaLista4 (x:xs) e
---     | x == e = removeItemDaLista4 x:xs e
+removeItemDaLista4 :: (Eq a) => [a] -> a -> [a]
+removeItemDaLista4 [] _ = []
+removeItemDaLista4 xs e = reverterLista (removeItemDaLista (reverterLista xs) e)
 
 -- troca velho por novo na lista (1 so vez)
 trocaVelhoPorNovo :: (Eq a) => [a] -> a -> a -> [a]
