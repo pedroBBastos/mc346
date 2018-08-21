@@ -21,3 +21,20 @@ splitAll elemento lista = splitAll' elemento lista []
           splitAll' e (x:xs) acc
               | x == e = acc:(splitAll' e xs [])
               | otherwise = splitAll' e xs (acc++x:[])
+
+-- drop n lista - a lista sem os n primeiros elementos
+dropNDaLista :: (Integral b) => b -> [a] -> [a]
+dropNDaLista n lista = dropNDaLista' n lista 1
+    where dropNDaLista' n [] _ = []
+          dropNDaLista' n (x:xs) count
+              | count == n = xs
+              | otherwise = dropNDaLista' n xs (count+1)
+
+-- take n lista - os primeiros n elementos da lista
+takeNDaLista :: (Integral b) => b -> [a] -> [a]
+takeNDaLista n lista = takeNDaLista' n lista []
+    where takeNDaLista' n [] acc = acc
+          takeNDaLista' 0 _ _ = []
+          takeNDaLista' n (x:xs) acc
+              | n == 1 = (acc ++ x:[])
+              | otherwise = takeNDaLista' (n-1) xs (acc ++ x:[])
