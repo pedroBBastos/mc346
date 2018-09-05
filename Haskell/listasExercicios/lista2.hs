@@ -9,7 +9,7 @@ posicoes e lista = posicoes' e lista [] 0
 -- split - dado um item e uma lista retorna uma lista de listas, todos os elementos da lista antes do item (a primeira vez que ele aparece) e todos depois
 split :: (Eq a) => a -> [a] -> [[a]]
 split elemento lista = split' elemento lista []
-    where split' e [] acc = [[]]
+    where split' e [] acc = [acc]
           split' e (x:xs) acc
               | x == e = acc:[xs]  -- acc eh uma lista dos elementos que estao antes de 'e' -> Por isso eh colocada no inicio de uma nova lista de lista que tem como elemento o resto da lista original
               | otherwise = split' e xs (acc++x:[])
@@ -17,7 +17,7 @@ split elemento lista = split' elemento lista []
 -- splitall - mesma coisa que o split mas retorna todas as sublistas
 splitAll :: (Eq a) => a -> [a] -> [[a]]
 splitAll elemento lista = splitAll' elemento lista []
-    where splitAll' e [] acc = [[]]
+    where splitAll' e [] acc = [acc]
           splitAll' e (x:xs) acc
               | x == e = acc:(splitAll' e xs [])
               | otherwise = splitAll' e xs (acc++x:[])
