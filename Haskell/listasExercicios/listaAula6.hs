@@ -46,9 +46,28 @@ reverterLista l = foldl (\acc x -> x:acc) [] l
 -- intercala1 [1,2,3] [4,5,6,7,8]
 --  ==> [1,4,2,5,3,6]
 
--- intercala1 :: [a] -> [a] -> [a]
-
+--intercala1 :: [a] -> [a] -> [a]
 
 
 -- intercala2 [1,2,3] [4,5,6,7,8]
 --  ==>  [1,4,2,5,3,6,7,8]
+
+-- a lista ja esta ordenada?
+verificaOrdem :: (Ord a, Eq a) => [a] -> Bool
+verificaOrdem [] = True
+verificaOrdem l = fst (dobra l)
+    where dobra (x:xs) = foldl (\acc e -> if e < (snd acc) && (fst acc) == True then (False, e) else (fst acc, e)) (True, head l) xs
+
+-- retorna o ultimo elemento de uma lista
+ultimoElemento :: [a] -> a
+ultimoElemento [] = error "Lista vazia"
+ultimoElemento l = foldl1 (\acc e -> e) l
+
+-- retorna a lista sem o utlimo elemento
+-- semOUltimo :: [a] -> [a]
+-- semOUltimo [] = []
+
+-- shift right
+-- shiftRight :: [a] -> [a]
+-- shiftRight [] = []
+-- shiftRight l
