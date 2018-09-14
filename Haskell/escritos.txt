@@ -1,3 +1,16 @@
 http://learnyouahaskell.com/
 
 https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems
+
+data Maybe a = Nothing | Just a
+
+quando coloco (Just 4), digo que o tipo que criei eh (Maybe Int)
+Maybe pode ser interpretado como se fosse um conteiner (a box)
+Maybe eh um construtor de tipo, assim como [] ( (Maybe Int) eh um tipo concreto)
+
+class Functor f where -- esse f eh um type constructor (como Maybe e [])
+    fmap :: (a -> b) -> f a -> f b
+
+Functor eh um typeclass para coisas que podem ser mapeadas
+Um conteiner (box) eh um functor se implementa fmap
+Tree tbem eh um conteiner (box) por conta de sua declaração

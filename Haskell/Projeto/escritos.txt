@@ -1,0 +1,7 @@
+- definir um tipo para representar um grafo - OK
+
+- entrada de dados - OK
+
+- montagem do grafo e de fila de prioridade
+
+- rodar o dijkstra
