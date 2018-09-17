@@ -1,6 +1,6 @@
 a b a-pe 0.4
 b a a-pe 0.6
-b c a-pe 0.5 
+b c a-pe 0.5
 c b a-pe 0.5
 c d a-pe 0.3
 d c a-pe 0.3
