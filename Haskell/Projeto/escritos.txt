@@ -3,6 +3,14 @@ usar record syntax nas nossas definições de tipo
 
 value constructor (usado para definir os subtipos de um tipo) X type constructor (Maybe a)
 
+https://rosettacode.org/wiki/Priority_queue#Haskell
+http://hackage.haskell.org/package/pqueue
+
+https://stackoverflow.com/questions/13575715/multigraph-and-cheapest-path
+
+
+------------------------------------------------
+LEMBRAR DE CORRIGIR O SPLITALL
 ------------------------------------------------
 
 - definir um tipo para representar um grafo - OK

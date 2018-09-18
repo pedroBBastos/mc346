@@ -3,6 +3,13 @@ import Data.Maybe
 
 data Tripla = Tripla { node :: String, key :: String, adj :: [String]} deriving (Show, Eq)
 data Traslado = Traslado { modo :: String, tempo :: Float} deriving (Show, Eq)
+data Distancia = Infinita | Distancia Float deriving (Eq)
+
+instance Ord Distancia where
+  compare Infinita (Distancia _) = GT
+  compare (Distancia _) Infinita = LT
+  compare Infinita Infinita = EQ
+  compare (Distancia a) (Distancia b) = compare a b
 
 -----------------------------------------
 
@@ -57,10 +64,15 @@ criaTabelaDeCaminhos listaAdjacencias po vertexFromKey = foldl (\acc x -> atuali
 -- criaTabelaDeCaminhos' listaAdjacencias po vertexFromKey = foldl (\acc x -> acc ++ [atualizaCaminhos x]) [] listaAdjacencias
 --     where atualizaCaminhos adj = length (splitAll ' ' adj)
 
+-- constroiFilaDePrioridade :: [Vextex] -> Vextex -> (MinPQueue Vextex Float)
+-- constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrigem then insert v 0.0) (empty) listaVertices
+
+-- dijkstra :: Graph -> [(Edge, [Traslado])] ->
+
 process :: String -> String
 process input =
   let allLines = lines input
-      [listaAdjacencias, pOnibus, way] = splitAll "" allLines
+      [listaAdjacencias, pOnibus, desiredWay] = splitAll "" allLines
       h = paraTriplaConvencional $ criaTriplas listaAdjacencias
       (graph, nodeFromVertex, vertexFromKey) = graphFromEdges h -- criacao do grafo a partir das triplas criadas a partir da entrada
       tabelaAdjacencias = criaTabelaDeCaminhos listaAdjacencias (periodosOnibus pOnibus) vertexFromKey
