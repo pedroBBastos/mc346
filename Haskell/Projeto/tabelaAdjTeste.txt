@@ -1,0 +1,9 @@
+[((0,1),[Traslado {modo = "a-pe", tempo = 0.4}]),
+ ((1,0),[Traslado {modo = "a-pe", tempo = 0.6}]),
+ ((1,2),[Traslado {modo = "a-pe", tempo = 0.5}]),
+ ((2,1),[Traslado {modo = "a-pe", tempo = 0.5}]),
+ ((2,3),[Traslado {modo = "a-pe", tempo = 0.3}]),
+ ((3,2),[Traslado {modo = "a-pe", tempo = 0.3}]),
+ ((0,3),[Traslado {modo = "linha-370", tempo = 7.6}]),
+ ((3,4),[Traslado {modo = "a-pe", tempo = 3.0}]),
+ ((4,5),[Traslado {modo = "linha-567", tempo = 7.2},Traslado {modo = "a-pe", tempo = 12.3}])]

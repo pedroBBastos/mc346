@@ -11,12 +11,7 @@ https://stackoverflow.com/questions/13575715/multigraph-and-cheapest-path
 
 ------------------------------------------------
 LEMBRAR DE CORRIGIR O SPLITALL
+
+cada elemento da fila de prioridade deveria ter um campo "from" para identificar o vértice anterior da passagem
+    -->> definir um tipo para os elementos da fila de prioridade (usando record syntax)
 ------------------------------------------------
-
-- definir um tipo para representar um grafo - OK
-
-- entrada de dados - OK
-
-- montagem do grafo e de fila de prioridade
-
-- rodar o dijkstra
