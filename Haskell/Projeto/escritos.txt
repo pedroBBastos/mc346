@@ -14,4 +14,7 @@ LEMBRAR DE CORRIGIR O SPLITALL
 
 cada elemento da fila de prioridade deveria ter um campo "from" para identificar o vértice anterior da passagem
     -->> definir um tipo para os elementos da fila de prioridade (usando record syntax)
+
+acho que ainda assim, teremos que trabalhar mehor o item da fila de prioridade, pr conta da remoção
+    -->> nope basta usar deletAt + findIndex
 ------------------------------------------------

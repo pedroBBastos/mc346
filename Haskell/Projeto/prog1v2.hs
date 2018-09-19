@@ -4,13 +4,17 @@ import qualified Data.Set as Set
 
 data Tripla = Tripla { node :: String, key :: String, adj :: [String]} deriving (Show, Eq)
 data Traslado = Traslado { modo :: String, tempo :: Float} deriving (Show, Eq)
-data Distancia = Infinita | Distancia Float deriving (Eq)
+data Distancia = Infinita | Distancia Float deriving (Show, Eq)
+data ItemFilaPrioridade = ItemFilaPrioridade {distanciaAteAqui :: Distancia, verticeAtual :: Vertex, verticeAnterior :: Maybe Vertex} deriving (Show, Eq)
 
 instance Ord Distancia where
   compare Infinita (Distancia _) = GT
   compare (Distancia _) Infinita = LT
   compare Infinita Infinita = EQ
   compare (Distancia a) (Distancia b) = compare a b
+
+instance Ord ItemFilaPrioridade where
+  compare a b = compare (distanciaAteAqui a) (distanciaAteAqui b)
 
 -----------------------------------------
 
@@ -60,8 +64,10 @@ criaTabelaDeCaminhos listaAdjacencias po vertexFromKey = foldl (\acc x -> atuali
 -- criaTabelaDeCaminhos' listaAdjacencias po vertexFromKey = foldl (\acc x -> acc ++ [atualizaCaminhos x]) [] listaAdjacencias
 --     where atualizaCaminhos adj = length (splitAll ' ' adj)
 
-constroiFilaDePrioridade :: [Vertex] -> Vertex -> (Set.Set (Distancia, Vertex))
-constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrigem then Set.insert (Distancia 0.0, v) acc else Set.insert (Infinita, v) acc) (Set.fromList []) listaVertices
+constroiFilaDePrioridade :: [Vertex] -> Vertex -> (Set.Set ItemFilaPrioridade)
+constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrigem
+                                                                    then Set.insert (ItemFilaPrioridade {distanciaAteAqui=Distancia 0.0, verticeAtual=v, verticeAnterior=Nothing}) acc
+                                                                    else Set.insert (ItemFilaPrioridade {distanciaAteAqui=Infinita, verticeAtual=v, verticeAnterior=Nothing}) acc) (Set.fromList []) listaVertices
 
 -- (graph, nodeFromVertex, vertexFromKey), tabelaAdjacencias, origem, destino, saidaPlanejada
 dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> String
@@ -72,10 +78,11 @@ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias o d =
             | elemAt 0 f == d = d : acc
             | otherwise = let (label, key, adjVAtual) = nodeFromVertex v
                               subsetAdj = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, vertexFromKey e)).fst) t)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
-                              f' = (\fp l -> foldl (\acc e -> Set.insert (Distancia menorTraslado $ snd e, _______________________) (Set.delete ___ acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
+                              f' = (\fp l -> foldl (\acc e -> Set.insert (novoItemFilaPrioridade (fromJust $ menorTraslado $ snd e) (fst $ fst e) v) (Set.delete ___ acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
                           in asdasd -- chamar recursao aqui
                           where menorTraslado [] = Nothing
                                 menorTraslado traslados = foldl (\acc t -> if tempo t < tempo $ fromJust acc then Just t else acc) (Just $ head traslados) traslados
+                                novoItemFilaPrioridade d ve va = ItemFilaPrioridade {distanciaAteAqui=d, verticeAtual=ve, verticeAnterior=va}
 
 process :: String -> String
 process input =
