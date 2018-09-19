@@ -1,5 +1,6 @@
 import Data.Graph
 import Data.Maybe
+import qualified Data.Set as Set
 
 data Tripla = Tripla { node :: String, key :: String, adj :: [String]} deriving (Show, Eq)
 data Traslado = Traslado { modo :: String, tempo :: Float} deriving (Show, Eq)
@@ -64,10 +65,10 @@ criaTabelaDeCaminhos listaAdjacencias po vertexFromKey = foldl (\acc x -> atuali
 -- criaTabelaDeCaminhos' listaAdjacencias po vertexFromKey = foldl (\acc x -> acc ++ [atualizaCaminhos x]) [] listaAdjacencias
 --     where atualizaCaminhos adj = length (splitAll ' ' adj)
 
--- constroiFilaDePrioridade :: [Vextex] -> Vextex -> (MinPQueue Vextex Float)
--- constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrigem then insert v 0.0) (empty) listaVertices
+constroiFilaDePrioridade :: [Vertex] -> Vertex -> (Set.Set (Distancia, Vertex))
+constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrigem then Set.insert (Distancia 0.0, v) acc else Set.insert (Infinita, v) acc) (Set.fromList []) listaVertices
 
--- dijkstra :: Graph -> [(Edge, [Traslado])] ->
+dijkstra :: Graph -> [(Edge, [Traslado])] ->
 
 process :: String -> String
 process input =
