@@ -158,3 +158,19 @@ removeItem3([H|T], I, N, R) :- removeItem3(T, I, N, RR), concatena([H], RR, R).
 % remove item da lista (a ultima vez que ele aparece) **
 removeItem4([], _, []).
 removeItem4(L, I, R) :- reverteLista(L, LL), removeItem3(LL, I, 1, LLL), reverteLista(LLL, R).
+
+% troca velho por novo na lista (1 so vez)
+trocaVelhoPorNovo([], _, _, []).
+trocaVelhoPorNovo([V|T], V, N, [N|T]).
+trocaVelhoPorNovo([H|T], V, N, R) :- trocaVelhoPorNovo(T, V, N, RR), concatena([H], RR, R).
+
+% troca velho por novo na lista (todas vezes)
+trocaVelhoPorNovo2([], _, _, []).
+trocaVelhoPorNovo2([V|T], V, N, R) :- trocaVelhoPorNovo2(T, V, N, RR), concatena([N], RR, R).
+trocaVelhoPorNovo2([H|T], V, N, R) :- trocaVelhoPorNovo2(T, V, N, RR), concatena([H], RR, R).
+
+% troca velho por novo na lista n (as primeiras n vezes)
+trocaVelhoPorNovo3([], _, _, _, []).
+trocaVelhoPorNovo3(L, _, _, 0, L).
+trocaVelhoPorNovo3([V|T], V, N, Q, R) :- QQ is Q-1, trocaVelhoPorNovo3(T, V, N, QQ, RR), concatena([N], RR, R).
+trocaVelhoPorNovo3([H|T], V, N, Q, R) :- trocaVelhoPorNovo3(T, V, N, Q, RR), concatena([H], RR, R).
