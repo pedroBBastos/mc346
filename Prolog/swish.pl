@@ -78,3 +78,83 @@ intercala2([H1|T1], [H2|T2], LR, Acc) :-
     insere(Acc, H1, Acc1),
     insere(Acc1, H2, Acc2),
     intercala2(T1, T2, LRR, Acc2), LR = LRR.
+
+% a lista ja esta ordenada?
+
+head([H|_], H).
+verificaMenor(A, B) :- A < B.
+
+verificaOrdenacao([]).
+verificaOrdenacao([_]).
+verificaOrdenacao([H|T]) :- verificaOrdenacao(T), head(T, H2), verificaMenor(H, H2).
+
+% dado n gera a lista de 1 a n
+
+gera1aN(N, L) :- geraNa1(N, LL), reverteLista(LL, L).
+geraNa1(0, []).
+geraNa1(N, L) :- NN is N-1, geraNa1(NN, LL), L = [N|LL].
+
+outroGera1aN(1, [1]).
+outroGera1aN(N, L) :- NN is N-1,  outroGera1aN(NN, LL), concatena(LL, [N], LLL), L = LLL.
+
+% retorna o ultimo elemento de uma lista
+
+ultimoElemento([X], X).
+ultimoElemento([_|T], E) :- ultimoElemento(T, EE), E = EE.
+
+% retorna a lista sem o utlimo elemento
+
+tail([_|T], T).
+
+semUltimo([_], []).
+semUltimo([H|T], E) :- semUltimo(T, EE), concatena([H], EE, E).
+
+% shift right
+% shiftr([1,2,3,4],X)
+% X = [4,1,2,3]
+
+shiftRight([], []).
+shiftRight([X], [X]).
+shiftRight(L, R) :- ultimoElemento(L, U), semUltimo(L, SU), concatena([U], SU, RR), R = RR.
+
+% shiftr n lista (shift right n vezes)
+
+shiftRightN([], _, []).
+shiftRightN([X], _, [X]).
+shiftRightN(L, 0, L).
+shiftRightN(L, N, R) :- NN is N-1, shiftRight(L, RR), shiftRightN(RR, NN, R).
+
+% shift left
+% shiftl([1,2,3,4],X)
+% X = [2,3,4,1]
+
+shiftLeft([], []).
+shiftLeft([X], [X]).
+shiftLeft([H|T], R) :- concatena(T, [H], R).
+
+% shift left n vezes
+
+shiftLeftN([], _, []).
+shiftLeftN([X], _, [X]).
+shiftLeftN(L, 0, L).
+shiftLeftN(L, N, R) :- NN is N-1, shiftLeft(L, RR), shiftLeftN(RR, NN, R).
+
+% remove item da lista (1 vez so)
+removeItem([], _, []).
+removeItem([I|T], I, T).
+removeItem([H|T], I, R) :- removeItem(T, I, RR), concatena([H], RR, R).
+
+% remove item da lista (todas as vezes)
+removeItem2([], _, []).
+removeItem2([I|T], I, R) :- removeItem2(T, I, R).
+removeItem2([H|T], I, R) :- removeItem2(T, I, RR), concatena([H], RR, R).
+
+% remove item da lista n (as primeiras n vezes)
+removeItem3([], _, _, []).
+removeItem3(L, _, 0, L).
+removeItem3([I|T], I, N, R) :- NN is N-1, removeItem3(T, I, NN, R).
+removeItem3([H|T], I, N, R) :- removeItem3(T, I, N, RR), concatena([H], RR, R).
+
+% remove item da lista (a ultima vez que ele aparece) **
+removeItem4([], _, []).
+removeItem4(L, I, R) :- reverteLista(L, LL), removeItem3(LL, I, 1, LLL), reverteLista(LLL, R).
