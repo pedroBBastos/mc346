@@ -14,7 +14,8 @@ instance Ord Distancia where
   compare (Distancia a) (Distancia b) = compare a b
 
 instance Ord ItemFilaPrioridade where
-  compare a b = compare (distanciaAteAqui a) (distanciaAteAqui b)
+  compare a b = if comparaDistancias == EQ then compare (verticeAtual a) (verticeAtual b) else comparaDistancias
+      where comparaDistancias = compare (distanciaAteAqui a) (distanciaAteAqui b)
 
 -----------------------------------------
 
@@ -75,19 +76,56 @@ constroiFilaDePrioridade listaVertices vOrigem = foldl (\acc v -> if v == vOrige
 --     let filaP = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
 --     in rodaDijkstra nodeFromVertex vertexFromKey filaP tabelaAdjacencias (fromJust $ vertexFromKey destino) (fromJust $ vertexFromKey origem) ""
 --     where rodaDijkstra nFromV vFromK f t d v acc -- (graph, nodeFromVertex, vertexFromKey), filaPrioridade, tabelaAdjacencias, destino, verticeAtual, acc
---             | (verticeAtual $ Set.elemAt 0 f) == d = let (label, _, _) = nFromV d in acc ++ " " ++ label
+--             | (verticeAtual $ Set.elemAt 0 f) == d = let (label, _, _) = nFromV d in acc ++ " " ++ label ++ "\n"
 --             | otherwise = let (label, key, adjVAtual) = nFromV v
 --                               subsetAdj = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, fromJust $ vFromK e)).fst) t)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
 --                               f' = (\fp l -> foldl (\acc e -> Set.insert (novoItemFilaPrioridade (Distancia $ tempo $ fromJust $ menorTraslado $ snd e) (fst $ fst e) (Just v)) (Set.delete (fromJust (encontraItemPorVertice (fst $ fst e) acc)) acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
 --                               f'' = Set.deleteAt 0 f'
---                           in rodaDijkstra nFromV vFromK f' t d (verticeAtual $ Set.elemAt 0 f'') (acc ++ label) -- chamar recursao aqui
+--                           in rodaDijkstra nFromV vFromK f'' t d (verticeAtual $ Set.elemAt 0 f'') (acc ++ " " ++ label) -- chamar recursao aqui
 --                           where menorTraslado [] = Nothing
 --                                 menorTraslado traslados = foldl (\acc t -> if tempo t < tempo (fromJust acc) then Just t else acc) (Just $ head traslados) traslados
 --                                 novoItemFilaPrioridade d ve va = ItemFilaPrioridade {distanciaAteAqui=d, verticeAtual=ve, verticeAnterior=va}
 --                                 encontraItemPorVertice ve set = foldl (\acc x -> if verticeAtual x == ve then Just x else acc) Nothing (Set.elems set)
 
-dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> (Set.Set ItemFilaPrioridade)
-dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
+-- dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> [ItemFilaPrioridade]
+-- dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino =
+--     let filaP = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
+--     in rodaDijkstra nodeFromVertex vertexFromKey filaP tabelaAdjacencias (fromJust $ vertexFromKey destino) (fromJust $ vertexFromKey origem) ""
+--     where rodaDijkstra nFromV vFromK f t d v acc -- (graph, nodeFromVertex, vertexFromKey), filaPrioridade, tabelaAdjacencias, destino, verticeAtual, acc
+--             | (verticeAtual $ Set.elemAt 0 f) == d = [Set.elemAt 0 f]
+--             | otherwise = let (label, key, adjVAtual) = nFromV v
+--                               subsetAdj = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, fromJust $ vFromK e)).fst) t)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
+--                               f' = (\fp l -> foldl (\acc e -> Set.insert (novoItemFilaPrioridade (Distancia $ tempo $ fromJust $ menorTraslado $ snd e) (snd $ fst e) (Just v)) (Set.delete (fromJust (encontraItemPorVertice (snd $ fst e) acc)) acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
+--                               r = Set.elemAt 0 f'
+--                               f'' = Set.deleteAt 0 f'
+--                           in r : (rodaDijkstra nFromV vFromK f'' t d (verticeAtual $ Set.elemAt 0 f'') (acc ++ label)) -- chamar recursao aqui
+--                           where menorTraslado [] = Nothing
+--                                 menorTraslado traslados = foldl (\acc t -> if acc == Nothing || tempo t < tempo (fromJust acc) then Just t else acc) Nothing traslados
+--                                 novoItemFilaPrioridade d ve va = ItemFilaPrioridade {distanciaAteAqui=d, verticeAtual=ve, verticeAnterior=va}
+--                                 encontraItemPorVertice ve set = Set.foldl' (\acc x -> if verticeAtual x == ve then Just x else acc) Nothing set
+
+dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> [ItemFilaPrioridade]
+dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino =
+    let filaP = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
+    in rodaDijkstra nodeFromVertex vertexFromKey filaP tabelaAdjacencias (fromJust $ vertexFromKey destino) (fromJust $ vertexFromKey origem) ""
+    where rodaDijkstra nFromV vFromK f t d v acc -- (graph, nodeFromVertex, vertexFromKey), filaPrioridade, tabelaAdjacencias, destino, verticeAtual, acc
+            | (verticeAtual $ Set.elemAt 0 f) == d = [Set.elemAt 0 f]
+            | otherwise = let (label, key, adjVAtual) = nFromV v
+                              subsetAdj = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, fromJust $ vFromK e)).fst) t)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
+                              f' = (\fp l -> foldl (\acc e -> Set.insert (novoItemFilaPrioridade (Distancia $ tempo $ fromJust $ menorTraslado $ snd e) (snd $ fst e) (Just v)) (Set.delete (fromJust (encontraItemPorVertice (snd $ fst e) acc)) acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
+                              r = Set.elemAt 0 f'
+                              f'' = Set.deleteAt 0 f'
+                          in r : (rodaDijkstra nFromV vFromK f'' t d (verticeAtual $ Set.elemAt 0 f'') (acc ++ label)) -- chamar recursao aqui
+                          where menorTraslado [] = Nothing
+                                menorTraslado traslados = foldl (\acc t -> if acc == Nothing || tempo t < tempo (fromJust acc) then Just t else acc) Nothing traslados
+                                novoItemFilaPrioridade d ve va = ItemFilaPrioridade {distanciaAteAqui=d, verticeAtual=ve, verticeAnterior=va}
+                                encontraItemPorVertice ve set = Set.foldl' (\acc x -> if verticeAtual x == ve then Just x else acc) Nothing set
+
+-- verificaSubAdj :: [(Edge, [Traslado])] -> (String -> Maybe Vertex) -> Vertex -> [String] -> [(Edge, [Traslado])]
+-- verificaSubAdj t vFromK v adjVAtual = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, fromJust $ vFromK e)).fst) t)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
+
+-- dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> (Set.Set ItemFilaPrioridade)
+-- dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
 
 process :: String -> String
 process input =
@@ -102,6 +140,9 @@ process input =
       --result = show listaAdjacencias
       [o, d] = splitAll ' ' desiredWay
       result = show $ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias o d
+      --result = dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias o d
+      -- (label, key, adjVAtual) = nodeFromVertex 4
+      -- result = show $ verificaSubAdj tabelaAdjacencias vertexFromKey 4 adjVAtual
   in result
 
 -----------------------------------------
