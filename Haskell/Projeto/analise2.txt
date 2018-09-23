@@ -3,71 +3,33 @@
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 1, verticeAnterior = Nothing},
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = Nothing},
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 3, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
+  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing}
 ]
 
 [
   ItemFilaPrioridade {distanciaAteAqui = Distancia 0.0, verticeAtual = 0, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.4, verticeAtual = 1, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 7.6, verticeAtual = 3, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.0, verticeAtual = 4, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 2.0, verticeAtual = 2, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 3.0, verticeAtual = 1, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.0, verticeAtual = 3, verticeAnterior = Just 0}
 ]
 
 [
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.4, verticeAtual = 1, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 7.6, verticeAtual = 3, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.0, verticeAtual = 4, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 2.0, verticeAtual = 2, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 3.0, verticeAtual = 1, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.0, verticeAtual = 3, verticeAnterior = Just 0}
 ]
 
 [
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.4, verticeAtual = 1, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.9, verticeAtual = 2, verticeAnterior = Just 1},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 7.6, verticeAtual = 3, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.0, verticeAtual = 4, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.1, verticeAtual = 2, verticeAnterior = Just 4},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 3.0, verticeAtual = 1, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.0, verticeAtual = 3, verticeAnterior = Just 0}
 ]
 
 [
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.9, verticeAtual = 2, verticeAnterior = Just 1},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 7.6, verticeAtual = 3, verticeAnterior = Just 0},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 0.9, verticeAtual = 2, verticeAnterior = Just 1},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.2, verticeAtual = 3, verticeAnterior = Just 2},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.2, verticeAtual = 3, verticeAnterior = Just 2},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 4, verticeAnterior = Nothing},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.2, verticeAtual = 3, verticeAnterior = Just 2},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.2, verticeAtual = 4, verticeAnterior = Just 3},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.2, verticeAtual = 4, verticeAnterior = Just 3}
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 5, verticeAnterior = Nothing}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.2, verticeAtual = 4, verticeAnterior = Just 3},
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 11.4, verticeAtual = 5, verticeAnterior = Just 4}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = Distancia 11.4, verticeAtual = 5, verticeAnterior = Just 4}
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 1.1, verticeAtual = 2, verticeAnterior = Just 4},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 3.0, verticeAtual = 1, verticeAnterior = Just 0},
+  ItemFilaPrioridade {distanciaAteAqui = Distancia 4.0, verticeAtual = 3, verticeAnterior = Just 0}
 ]
