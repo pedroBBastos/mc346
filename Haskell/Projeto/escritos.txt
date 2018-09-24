@@ -23,3 +23,10 @@ acho que ainda assim, teremos que trabalhar mehor o item da fila de prioridade, 
 investigar problema com criação da fila de prioridade
     -->> ta dando erro pq a comparação dos elementos ItemFilaPrioridade eh feita pela distancia. Como dos que nao sao origem eh tudo igual, o insert
     do set acaba substituindo ao invés de inserir todos.
+
+
+------------------------------------------------
+
+
+pensar que nao precisamos passar o vertice atual como parametro da função interna rodaDijkstra ->> basta pegar o
+primeiro item da fila de prioridade
