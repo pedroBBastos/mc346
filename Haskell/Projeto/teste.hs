@@ -1,1 +1,6 @@
-f' = (\fp l -> foldl (\acc e -> Set.insert (novoItemFilaPrioridade (fromJust $ menorTraslado $ snd e) (fst $ fst e) v) (Set.delete $ fromJust (encontraItemPorVertice (fst $ fst e) acc) acc) ) fp l) f subsetAdj -- atualizacao da fila de prioridade
+splitall :: (Eq a) => a -> [a] -> [[a]]
+splitall sep [] = [[]]
+splitall sep (x:xs)
+   | x==sep = []:(a:as)
+   | otherwise = (x:a):as
+   where  (a:as) = splitall sep xs 
