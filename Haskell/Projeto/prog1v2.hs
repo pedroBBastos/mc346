@@ -4,7 +4,7 @@ import qualified Data.Set as Set
 
 data Tripla = Tripla { node :: String, key :: String, adj :: [String]} deriving (Show, Eq)
 data Traslado = Traslado { modo :: String, tempo :: Float} deriving (Show, Eq)
-data Distancia = Infinita | Distancia { valorDistancia :: Float} deriving (Show, Eq)
+data Distancia = Infinita | Distancia { valorDistancia :: Float} deriving (Eq)
 data ItemFilaPrioridade = ItemFilaPrioridade {distanciaAteAqui :: Distancia, verticeAtual :: Vertex, verticeAnterior :: (Maybe Vertex, Maybe String)} deriving (Show, Eq)
 
 instance Ord Distancia where
@@ -16,6 +16,10 @@ instance Ord Distancia where
 instance Ord ItemFilaPrioridade where
   compare a b = if comparaDistancias == EQ then compare (verticeAtual a) (verticeAtual b) else comparaDistancias
       where comparaDistancias = compare (distanciaAteAqui a) (distanciaAteAqui b)
+
+instance Show Distancia where
+  show Infinita = "Infinita"
+  show (Distancia d) = show d
 
 -----------------------------------------
 
@@ -101,6 +105,12 @@ verificaSubAdj t vFromK v adjVAtual = (\a -> foldl (\acc e -> acc ++ (filter ((=
 -- dijkstra :: (Graph, (Vertex -> (String, String, [String])), (String -> Maybe Vertex)) -> [(Edge, [Traslado])] -> String -> String -> (Set.Set ItemFilaPrioridade)
 -- dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino = constroiFilaDePrioridade (vertices graph) (fromJust $ vertexFromKey origem)
 
+saida :: [ItemFilaPrioridade] -> (Vertex -> (String, String, [String])) -> String
+saida l nodeFromVertex = tail $ fst $ foldr (\i acc -> if snd acc == Nothing || (fromJust $ snd acc)  == verticeAtual i
+                                                        then ((fromMaybe "" (snd $ verticeAnterior i)) ++ " " ++ (pegaIdVertice $ verticeAtual i) ++ " " ++ fst acc, fst $ verticeAnterior i)
+                                                        else acc) ("", Nothing) l
+    where pegaIdVertice v = let (label, _, _) = nodeFromVertex v in label
+
 process :: String -> String
 process input =
   let allLines = lines input
@@ -113,8 +123,9 @@ process input =
       --result = show h
       --result = show listaAdjacencias
       [o, d] = splitAll ' ' desiredWay
-      result = show $ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias (fromJust $ vertexFromKey o) (fromJust $ vertexFromKey d)
-      --result = dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias o d
+      --result = show $ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias (fromJust $ vertexFromKey o) (fromJust $ vertexFromKey d)
+      dijkstraResult = dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias (fromJust $ vertexFromKey o) (fromJust $ vertexFromKey d)
+      result = (saida dijkstraResult nodeFromVertex) ++ "\n"  ++ (show $ distanciaAteAqui $ last dijkstraResult) ++ "\n"
       --(label, key, adjVAtual) = nodeFromVertex 3
       --result = show $ verificaSubAdj tabelaAdjacencias vertexFromKey 3 adjVAtual
   in result
