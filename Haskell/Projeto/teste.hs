@@ -1,6 +1,9 @@
-splitall :: (Eq a) => a -> [a] -> [[a]]
-splitall sep [] = [[]]
-splitall sep (x:xs)
-   | x==sep = []:(a:as)
-   | otherwise = (x:a):as
-   where  (a:as) = splitall sep xs 
+process :: String -> String
+process input =
+  let allLines = lines input
+      [listaAdjacencias, pOnibus, [desiredWay]] = processaEntrada allLines
+  in show desiredWay
+
+-----------------------------------------
+
+main = interact process

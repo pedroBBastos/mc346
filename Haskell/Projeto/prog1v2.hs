@@ -23,21 +23,21 @@ instance Show Distancia where
 
 -----------------------------------------
 
-splitAll :: (Eq a) => a -> [a] -> [[a]]
-splitAll elemento lista = splitAll' elemento lista []
-    where splitAll' e [] acc = [acc]
-          splitAll' e (x:xs) acc
-              | x == e = acc:(splitAll' e xs [])
-              | otherwise = splitAll' e xs (acc++x:[])
+processaEntrada :: [String] -> [[String]]
+processaEntrada [] = []
+processaEntrada entrada = let e = takeWhile (/= "") entrada
+                              r = dropWhile (/= "") entrada
+                              r' = if length r == 0 then r else tail r
+                          in [e] ++ processaEntrada r'
 
 paraTriplaConvencional :: [Tripla] -> [(String, String, [String])]
 paraTriplaConvencional vTripla = foldl (\acc t -> acc ++ [(node t, key t, adj t)]) [] vTripla
 
 periodosOnibus :: [String] -> [(String, Float)]
-periodosOnibus v = foldl (\acc p -> let [linha, tempoEspera] = splitAll ' ' p in acc ++ [(linha, read tempoEspera)]) [] v
+periodosOnibus v = foldl (\acc p -> let [linha, tempoEspera] = words p in acc ++ [(linha, read tempoEspera)]) [] v
 
 criaTriplas :: [String] -> [Tripla]
-criaTriplas listaAdjacencias = foldl (\acc x -> add (splitAll ' ' x) acc) [] listaAdjacencias
+criaTriplas listaAdjacencias = foldl (\acc x -> add (words x) acc) [] listaAdjacencias
     where add (origem:destino:resto) vTripla =
             let vTripla' = if pegaVertice origem vTripla == Nothing then vTripla ++ [Tripla {node=origem, key=origem, adj=[]}] else vTripla
                 vTripla'' = if pegaVertice destino vTripla == Nothing then vTripla' ++ [Tripla {node=destino, key=destino, adj=[]}] else vTripla'
@@ -55,7 +55,7 @@ criaTriplas listaAdjacencias = foldl (\acc x -> add (splitAll ' ' x) acc) [] lis
 criaTabelaDeCaminhos :: [String] -> [(String, Float)] -> (String -> Maybe Vertex) -> [(Edge, [Traslado])]
 criaTabelaDeCaminhos listaAdjacencias po vertexFromKey = foldl (\acc x -> atualizaCaminhos x acc) [] listaAdjacencias
     where atualizaCaminhos adj tabela =
-            let [o, d, oModo, oTempo] = splitAll ' ' adj
+            let [o, d, oModo, oTempo] = words adj
                 theEdge = (fromJust $ vertexFromKey o, fromJust $ vertexFromKey d)
                 timeExpend = read oTempo + (waitTime oModo)/2
             in updateTable theEdge oModo timeExpend tabela
@@ -114,7 +114,7 @@ saida l nodeFromVertex = tail $ fst $ foldr (\i acc -> if snd acc == Nothing || 
 process :: String -> String
 process input =
   let allLines = lines input
-      [listaAdjacencias, pOnibus, [desiredWay]] = splitAll "" allLines
+      [listaAdjacencias, pOnibus, [desiredWay]] = processaEntrada allLines
       h = paraTriplaConvencional $ criaTriplas listaAdjacencias
       (graph, nodeFromVertex, vertexFromKey) = graphFromEdges h -- criacao do grafo a partir das triplas criadas a partir da entrada
       tabelaAdjacencias = criaTabelaDeCaminhos listaAdjacencias (periodosOnibus pOnibus) vertexFromKey
@@ -122,7 +122,7 @@ process input =
       --result = show tabelaAdjacencias
       --result = show h
       --result = show listaAdjacencias
-      [o, d] = splitAll ' ' desiredWay
+      [o, d] = words desiredWay
       --result = show $ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias (fromJust $ vertexFromKey o) (fromJust $ vertexFromKey d)
       dijkstraResult = dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias (fromJust $ vertexFromKey o) (fromJust $ vertexFromKey d)
       result = (saida dijkstraResult nodeFromVertex) ++ "\n"  ++ (show $ distanciaAteAqui $ last dijkstraResult) ++ "\n"
