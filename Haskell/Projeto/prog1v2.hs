@@ -57,7 +57,7 @@ criaTabelaDeCaminhos listaAdjacencias po vertexFromKey = foldl (\acc x -> atuali
     where atualizaCaminhos adj tabela =
             let [o, d, oModo, oTempo] = words adj
                 theEdge = (fromJust $ vertexFromKey o, fromJust $ vertexFromKey d)
-                timeExpend = read oTempo + (waitTime oModo)/2
+                timeExpend = read oTempo -- + (waitTime oModo)/2
             in updateTable theEdge oModo timeExpend tabela
             where waitTime linha = foldl (\acc x -> if fst x == linha then snd x else acc) 0 po
                   updateTable e m t [] = [(e, [Traslado {modo=m, tempo=t}])]
@@ -79,16 +79,18 @@ novoItemFilaPrioridade d ve va = ItemFilaPrioridade {distanciaAteAqui=d, vertice
 removeItemFilaPrioridade :: (Set.Set ItemFilaPrioridade) -> Maybe ItemFilaPrioridade -> (Set.Set ItemFilaPrioridade)
 removeItemFilaPrioridade set item = if item == Nothing then set else Set.delete (fromJust item) set
 
-atualizaFilaPrioridade :: (Set.Set ItemFilaPrioridade) -> Distancia -> [(Edge, [Traslado])] -> (Set.Set ItemFilaPrioridade)
-atualizaFilaPrioridade fp d adjs = foldl (\acc e -> let item = encontraItemPorVertice (snd $ fst e) acc
+atualizaFilaPrioridade :: (Set.Set ItemFilaPrioridade) -> ItemFilaPrioridade -> [(Edge, [Traslado])] -> (Set.Set ItemFilaPrioridade)
+atualizaFilaPrioridade fp atual adjs = foldl (\acc e -> let item = encontraItemPorVertice (snd $ fst e) acc
                                                         melhorTraslado = menorTraslado $ snd e
-                                                        novaDistancia = distanciaAtualizada e melhorTraslado
+                                                        novaDistancia = distanciaAtualizada melhorTraslado (snd $ verticeAnterior atual)
                                                     in if novaDistancia < (distanciaAteAqui $ fromJust item)
                                                         then Set.insert
                                                                   (novoItemFilaPrioridade novaDistancia (snd $ fst e) (Just (fst $ fst e), Just $ modo $ fromJust melhorTraslado))
                                                                   (removeItemFilaPrioridade acc item)
                                                         else acc) fp adjs
-    where distanciaAtualizada a mt = Distancia $ (tempo $ fromJust mt) + (valorDistancia d)
+    where distanciaAtualizada mt ultimoModo = if ultimoModo /= (modo mt)
+                                                then Distancia $ (tempo $ fromJust mt) + (valorDistancia $ distanciaAteAqui d)
+                                                else
           menorTraslado [] = Nothing
           menorTraslado traslados = foldl (\acc t -> if acc == Nothing || tempo t < tempo (fromJust acc) then Just t else acc) Nothing traslados
 
@@ -100,7 +102,7 @@ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino
                               subsetAdj = (\a -> foldl (\acc e -> acc ++ (filter ((==(v, fromJust $ vertexFromKey e)).fst) tabelaAdjacencias)) [] a) adjVAtual -- quero um subset da listaAdjacencias que seja referente as adjacencias do no atual
                               subsetAdj' = foldl (\acc e -> if (snd $ fst e) `elem` c then acc else acc ++ [e]) [] subsetAdj -- remover de subsetAdj os vertices que ja foram visitados
                               topo = Set.elemAt 0 f
-                              f' = atualizaFilaPrioridade f (distanciaAteAqui topo) subsetAdj'
+                              f' = atualizaFilaPrioridade f topo subsetAdj'
                               f'' = Set.deleteAt 0 f'
                           in topo : (rodaDijkstra f'' (verticeAtual $ Set.elemAt 0 f'') (c ++ [v])) -- chamar recursao aqui
 
