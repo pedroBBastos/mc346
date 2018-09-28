@@ -39,4 +39,3 @@ PARA REFACTOR
 
   - filtro do subset de adjacencias na propria função anonima para pegar as adjacencias de um vertice -> na mesma linha
   - usar dicionário ou lista simples ao invés de um Set (menos trabalho -> para transformar em uma "fila de prioridade" basta ordenar a estrutura (chamar algum sort))
-  - repensar leitura da entrada, para usar alguma função de alto nível ou algo que seja mais bonito.

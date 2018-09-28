@@ -103,8 +103,6 @@ dijkstra (graph, nodeFromVertex, vertexFromKey) tabelaAdjacencias origem destino
                               f' = atualizaFilaPrioridade f (distanciaAteAqui topo) subsetAdj'
                               f'' = Set.deleteAt 0 f'
                           in topo : (rodaDijkstra f'' (verticeAtual $ Set.elemAt 0 f'') (c ++ [v])) -- chamar recursao aqui
-                          where menorTraslado [] = Nothing
-                                menorTraslado traslados = foldl (\acc t -> if acc == Nothing || tempo t < tempo (fromJust acc) then Just t else acc) Nothing traslados
 
 saida :: [ItemFilaPrioridade] -> (Vertex -> (String, String, [String])) -> String
 saida l nodeFromVertex = tail $ fst $ foldr (\i acc -> if snd acc == Nothing || (fromJust $ snd acc)  == verticeAtual i
