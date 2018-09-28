@@ -37,8 +37,6 @@ PARA REFACTOR
   - levar em consideração trajeto de uma linha. Se já estou em um ônibus quando chego em um vértice e para ir
   para o próximo tbem eh pela mesmoma linha, nao devo contar + metade do tempo de espera pois ja estou no onibus
 
-
-  - substituir o splitAll por words -> nao precisa, desnecessario.
   - filtro do subset de adjacencias na propria função anonima para pegar as adjacencias de um vertice -> na mesma linha
   - usar dicionário ou lista simples ao invés de um Set (menos trabalho -> para transformar em uma "fila de prioridade" basta ordenar a estrutura (chamar algum sort))
   - repensar leitura da entrada, para usar alguma função de alto nível ou algo que seja mais bonito.
