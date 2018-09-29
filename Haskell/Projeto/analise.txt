@@ -8,73 +8,22 @@
 
 [
   ItemFilaPrioridade {distanciaAteAqui = 0.0, verticeAtual = 0, verticeAnterior = (Nothing,Nothing)},
-  ItemFilaPrioridade {distanciaAteAqui = 0.5, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
+  ItemFilaPrioridade {distanciaAteAqui = 0.90000004, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
   ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = 2.4, verticeAtual = 4, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
 ]
 
 [
-  ItemFilaPrioridade {distanciaAteAqui = 0.5, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
+  ItemFilaPrioridade {distanciaAteAqui = 0.90000004, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
   ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = 2.4, verticeAtual = 4, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
 ]
 
 [
-  ItemFilaPrioridade {distanciaAteAqui = 0.5, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
+  ItemFilaPrioridade {distanciaAteAqui = 0.90000004, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
   ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = 2.4, verticeAtual = 4, verticeAnterior = (Just 0,Just "a-pe")},
   ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 0.5, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.4, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.4, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = 1.4, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}
-]
-
---------------------
--- O ERRO NA VERDADE ESTÁ AQUI. ATUALIZAMOS AUTOMATICAMENTE A DISTANCIA, QUANDO ANTES DEVERÍAMOS VER SE A NOVA DISTANCIA EH MENOR QUE A JÁ COLOCADA
---------------------
-[
-  ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},
-  ItemFilaPrioridade {distanciaAteAqui = 2.0, verticeAtual = 2, verticeAnterior = (Just 4,Just "a-pe")}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 2.0, verticeAtual = 2, verticeAnterior = (Just 4,Just "a-pe")}
-]
-
-[
-  ItemFilaPrioridade {distanciaAteAqui = 2.0, verticeAtual = 2, verticeAnterior = (Just 4,Just "a-pe")}
-]
+],fromList [ItemFilaPrioridade {distanciaAteAqui = 0.90000004, verticeAtual = 3, verticeAnterior = (Just 0,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = Infinita, verticeAtual = 2, verticeAnterior = (Nothing,Nothing)}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 1, verticeAnterior = (Just 0,Just "a-pe")},ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = 1.7, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = 1.7, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = 1.7, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.0, verticeAtual = 4, verticeAnterior = (Just 3,Just "linha-666")},ItemFilaPrioridade {distanciaAteAqui = 1.7, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}],fromList [ItemFilaPrioridade {distanciaAteAqui = 1.7, verticeAtual = 2, verticeAnterior = (Just 1,Just "a-pe")}]]
