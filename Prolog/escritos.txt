@@ -1,0 +1,11 @@
+https://www.youtube.com/watch?v=SykxWpFwMGs
+
+http://www.swi-prolog.org/pldoc/man?predicate=read/1
+http://www.swi-prolog.org/pldoc/man?section=readutil
+
+--------------------------
+
+https://stackoverflow.com/questions/16898156/how-to-concatenate-two-atoms-strings/38112120
+
+repeat
+http://www.swi-prolog.org/pldoc/man?predicate=repeat/0
