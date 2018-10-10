@@ -33,6 +33,22 @@ def mostCommonElement(l):
     return d[chaveMaiorValor(d)]
 
 # uma lista é sublista de outra?
+# isso aqui depende muito do que se considera uma sublista
+#   -> 1 - se pura e simplesmente for verificar se todos os elementos da sublista estão, independente da ordem, na lista
+#   -> 2 - ou se a sublista deve estar na lista respeitando-se o sequenciamento da sublista
+
+#1
+def verificaSublistaEmLista1(sl, l):
+    return len(sl) == len([x for x in sl if x in l])
+
+#2
+def verificaSublistaEmLista2(sl, l):
+    if len(l) < len(sl): # or len(sl) == 0:
+        return False
+    elif l[:len(sl)] == sl:
+        return True
+    else:
+        return verificaSublistaEmLista2(sl, l[1:])
 
 # dado 2 strings o fim de um é igual ao comeco do outro? (do projeto de prolog)
 def verificaJoinStrings(s1, s2):
