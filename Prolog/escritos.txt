@@ -9,3 +9,8 @@ https://stackoverflow.com/questions/16898156/how-to-concatenate-two-atoms-string
 
 repeat
 http://www.swi-prolog.org/pldoc/man?predicate=repeat/0
+
+
+--------------------------
+
+perguntar para o prof se o arquivo de entrada vai ter os pontos finais no final de cada linha
