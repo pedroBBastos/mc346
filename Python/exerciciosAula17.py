@@ -52,8 +52,7 @@ def verificaSublistaEmLista2(sl, l):
 
 # dado 2 strings o fim de um é igual ao comeco do outro? (do projeto de prolog)
 def verificaJoinStrings(s1, s2):
-    if s1 == "" or s2 == "":
-        return False
-    elif s1[1:] == s2[:len(s2)-1]:
-        return True
-    return verificaJoinStrings(s1[1:], s2[:len(s2)-1])
+    for n in range(1, min(len(s1), len(s2))+1):
+        if(s1[len(s1)-n:] == s2[:n]):
+            return True
+    return False
