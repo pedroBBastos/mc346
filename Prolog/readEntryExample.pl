@@ -37,21 +37,28 @@ sub_string("abdef", _, 1, 0, C).
 
 % http://www.swi-prolog.org/pldoc/man?predicate=string_length/2
 
-% predicado que retorna o que ha em comum entre o fim de S1 e o inicio de S2
-commonForMe(S1, S2, R, L) :-
-    sub_string(S1, _, 1, 0, LastCharS1),
-    sub_string(S2, 0, 1, _, LastCharS2),
-    (LastCharS1 = LastCharS2
-    ->  sub_string(S1, 0, _, 1, WithoutLastChar1),
-        sub_string(S2, 1, _, 0, WithoutLastChar2),
-        commonForMe(WithoutLastChar1, WithoutLastChar2, RR, LL),
-        string_concat(RR, LastCharS1, R),
-        L is LL + 1;
-    R = "", L = 0).
+prepend(L, E, [E|L]).
 
-% predicado para combinar duas strings que possuem final e início, respectivamente, em comum
+% commonForMe("abcfcf", "cfcfdd", 1, [], X)
+commonForMe(S1, S2, L, Acc, R) :-
+    string_length(S1, L1), string_length(S2, L2),
+    (L > L1 ->  R = Acc;
+     L > L2 ->  R = Acc;
+    	sub_string(S1, _, L, 0, LastCharS1),
+    	sub_string(S2, 0, L, _, LastCharS2),
+        LL is L+1,
+    	(LastCharS1 = LastCharS2
+    	->  prepend(Acc, LastCharS1, Acc2),
+            commonForMe(S1, S2, LL, Acc2, R);
+        commonForMe(S1, S2, LL, Acc, R))).
+
+head([], "").
+head([H|_], H).
+
 combine(S1, S2, R) :-
-    commonForMe(S1, S2, _, LengthCommon),
+    commonForMe(S1, S2, 1, [], V),
+    head(V, H),
+    string_length(H, LengthCommon),
     (  LengthCommon > 0
     -> sub_string(S2, LengthCommon, _, 0, S2WithoutCommon), string_concat(S1, S2WithoutCommon, R);
     R = "").
