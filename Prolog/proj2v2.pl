@@ -20,14 +20,14 @@ combine(S1, S2, R) :-
     commonForMe(S1, S2, 1, [], V),
     head(V, H),
     string_length(H, LengthCommon),
-    (  LengthCommon > 3
+    (  LengthCommon > 0
     -> sub_string(S2, LengthCommon, _, 0, S2WithoutCommon), string_concat(S1, S2WithoutCommon, R);
     R = "").
 
 % -----------------------------------------
 
-% P( +Genoma, +Acumulador, -NovoAcum)
-p(G, [], [G]).
+%P( +Genoma, +Acumulador, -NovoAcum)
+p(G, [], [G]) :- !, true.
 p(G, [H|T], NovoAcc) :-
     combine(H, G, R1),
     (R1 = "" ->  combine(G, H, R2),
@@ -38,4 +38,4 @@ p(G, [H|T], NovoAcc) :-
 
 montaGenoma(L, R) :- foldl(p, L, [], R).
 
-% montaGenoma(["xxxxxababababyyyyyy", "yyaaaaaaaaaaa", "yyyyyyeeeeeeeeeeeeee", "cccccccccccccccxxxxx", "fffffffffffffffwwwwww", "wwwwwwgggggggggggxx"], X).
+%montaGenoma(["xxxxxababababyyyyyy", "yyaaaaaaaaaaa", "yyyyyyeeeeeeeeeeeeee", "cccccccccccccccxxxxx", "fffffffffffffffwwwwww", "wwwwwwgggggggggggxx"], X).
