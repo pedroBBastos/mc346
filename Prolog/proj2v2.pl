@@ -38,3 +38,21 @@ p(G, [H|T], NovoAcc) :-
 
 montaGenoma(L, R) :- foldl(p, L, [], R).
 %montaGenoma(["xxxxxababababyyyyyy", "yyaaaaaaaaaaa", "yyyyyyeeeeeeeeeeeeee", "cccccccccccccccxxxxx", "fffffffffffffffwwwwww", "wwwwwwgggggggggggxx"], X).
+
+% -----------------------------------------
+
+% predicado para montar vetor com linhas da entrada
+entrada([H|T]):- read_line_to_codes(user_input,H), H \= end_of_file, entrada(T).
+entrada([]).
+
+transf([H], R) :- string_codes(String, H), R = [String].
+transf([H|T], R) :- string_codes(String, H), transf(T, RR), append([String], RR, R).
+
+saida([H|T]) :- write("\n"), write(H), saida(T).
+saida([]).
+
+main :-
+    entrada(X),
+    transf(X, S),
+    montaGenoma(S, R),
+    saida(R).
