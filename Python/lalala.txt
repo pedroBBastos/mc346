@@ -1,0 +1,2 @@
+Executando funcao às 20:23:47, com argumentos [3, 2, ], com retorno => 8
+Executando funcao às 20:24:18, com argumentos [3, 2, ], com retorno => 8
