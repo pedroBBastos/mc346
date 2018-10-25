@@ -1,0 +1,3 @@
+- usar algum algoritmo de grafo para construir os menores caminhos
+  -> Djkistra para cada T(X,Y)
+  -> Floyd-Warshall para calcular de uma vez só os tempos mínimos entre todos os vértices

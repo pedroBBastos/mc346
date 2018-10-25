@@ -1,9 +1,13 @@
-# https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.floyd_warshall.html#scipy.sparse.csgraph.floyd_warshall
+# https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm
+# https://www.youtube.com/watch?v=4OQeCuLYj-4
 
 def leGrafo():
     graph = {}
     while True:
-        entry = input()
+        try:
+            entry = input()
+        except EOFError as e:
+            break
         if entry == "":
             break
         e = entry.split()
@@ -15,7 +19,8 @@ def leGrafo():
 
 def main():
     grafo = leGrafo()
-    viagens = leViagens()
+    print(grafo)
+    #viagens = leViagens()
 
 if __name__ == "__main__":
     main()
