@@ -1,3 +1,12 @@
 - usar algum algoritmo de grafo para construir os menores caminhos
   -> Djkistra para cada T(X,Y)
   -> Floyd-Warshall para calcular de uma vez só os tempos mínimos entre todos os vértices
+
+------------------------------------------------------------------------------------------------------------------------------
+
+- A saída deve ser uma lista dos percursos propostos. No máximo 2 passageiros farão uma viagem compartilhada, e assuma uma estratégia gulosa.
+
+- Escolha o par de passageiros cujo percurso gera a menor inconveniencia maxima, depois o próximo par de passageiros, e assim por diante.
+  - como pegar todos os caminhos possíveis considerando origem e destino dos dois passageiros?? Com isso seria razoavel calcular as incoveniencias e pegar o
+  melhor par de passageiros
+  - para pegar este par, devo cruzar todas as possibilidades entre todos os passageiros passados?
